@@ -2,7 +2,7 @@ import unittest
 
 import subprocess as sp
 
-from pyggc.ghcli.simple import total_stargazers, get_stargazers
+from pyggc.ghcli.simple import total_stargazers, pack_stargazers, get_stargazers
 
 
 OWNER = 'scapeville'
@@ -20,6 +20,20 @@ class Test__total_stargazers(unittest.TestCase):
     def test_owner_not_found(self):
         with self.assertRaises(sp.CalledProcessError):
             total_stargazers(NONEXISTENT_OWNER)
+
+
+class Test__pack_stargazers(unittest.TestCase):
+
+    def test_success(self):
+        pack = pack_stargazers(OWNER)
+        for k, v in pack.items():
+            self.assertIsInstance(k, str)
+            self.assertIsInstance(v, int)
+            self.assertGreaterEqual(v, 0)
+
+    def test_owner_not_found(self):
+        with self.assertRaises(sp.CalledProcessError):
+            pack_stargazers(NONEXISTENT_OWNER)
 
 
 class Test__get_stargazers(unittest.TestCase):
