@@ -51,7 +51,9 @@ class Test__get_num_commits(unittest.TestCase):
 
         ## Git init
         sp.run(['git', 'init'], cwd=self.cwd, check=True)
-        
+        sp.run(['git', 'config', 'user.name', 'foo'], cwd=self.cwd, check=True)
+        sp.run(['git', 'config', 'user.email', 'bar'], cwd=self.cwd, check=True)
+
         ## Make a dummy commit
         open(os.path.join(self.cwd, 'foo.txt'), 'w').close()
         sp.run(['git', 'add', '.'], cwd=self.cwd, check=True)
