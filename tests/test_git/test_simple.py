@@ -44,7 +44,7 @@ class Test__get_num_commits(unittest.TestCase):
         self.cwd = tempfile.mkdtemp()
 
     def tearDown(self):
-        self.assertEqual(os.path.isdir(self.cwd))  # Debugging purposes
+        self.assertEqual(os.path.isdir(self.cwd), True)  # Debugging purposes
         shutil.rmtree(self.cwd)
 
     def test_success(self):
