@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "py-git-ghcli"
+version = "0.1.0"
+description = "Bunch of Python functions for Git and GitHub CLI tasks."
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+  	{name = "Nicholas Valentinus", email = "nicho@scapeville.com"},
+]
+
+
+[tool.setuptools.packages.find]
+exclude = [
+    "docs*",
+]
+
+
+[project.urls]
+Repository = "https://github.com/scapeville/py-git-ghcli"
