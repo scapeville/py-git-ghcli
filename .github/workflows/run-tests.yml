@@ -21,3 +21,5 @@ jobs:
         with:
           python-version: ${{ matrix.version }}
       - run: python -m unittest -v
+        env:
+          GH_TOKEN: ${{ github.token }}  # For GH CLI
