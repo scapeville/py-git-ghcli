@@ -1,6 +1,7 @@
 # Py-Git-GhCli
 
 [![Run tests](https://github.com/scapeville/py-git-ghcli/actions/workflows/run-tests.yml/badge.svg)](https://github.com/scapeville/py-git-ghcli/actions/workflows/run-tests.yml)
+[![PyPI Version](https://img.shields.io/pypi/v/pyggc.svg)](https://pypi.org/project/pyggc/)
 
 Bunch of Python functions for Git and GitHub CLI tasks.
 
