@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyggc"
-version = "1.0.0"
+version = "1.1.0"
 description = "Bunch of Python functions for Git and GitHub CLI tasks."
 readme = "README.md"
 requires-python = ">=3.8"
