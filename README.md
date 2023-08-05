@@ -15,6 +15,7 @@ pip install pyggc
 ```python
 from pyggc.ghcli import get_stargazers
 from pyggc.git import get_num_commits
+
 ```
 
 
