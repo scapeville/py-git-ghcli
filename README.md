@@ -13,9 +13,26 @@ pip install pyggc
 ## Usage
 
 ```python
-from pyggc.ghcli import get_stargazers
-from pyggc.git import get_num_commits
+from pyggc.git.simple import clone
 
+clone(
+    url='https://github.com/scapeville/py-git-ghcli.git',
+    cwd='/projects'
+)
+```
+
+```python
+from pyggc.git.simple import get_num_commits
+
+num = get_num_commits('/projects/my-project')
+print(num)
+```
+
+```python
+from pyggc.ghcli.simple import get_stargazers
+
+stars = get_stargazers('/projects/my-project')
+print(stars)
 ```
 
 
