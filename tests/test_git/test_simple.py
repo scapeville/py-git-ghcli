@@ -73,7 +73,7 @@ class Test__get_num_commits(unittest.TestCase):
         nonexistent_cwd = os.path.join(self.cwd, 'foobarbaz')
 
         ## Test
-        with self.assertRaises(NotADirectoryError):
+        with self.assertRaises((NotADirectoryError, FileNotFoundError)):
             get_num_commits(nonexistent_cwd)
 
     def test_not_a_git_repo(self):
