@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyggc"
-version = "0.1.0"
+version = "0.1.0b"
 description = "Bunch of Python functions for Git and GitHub CLI tasks."
 requires-python = ">=3.8"
 license = {text = "MIT"}
