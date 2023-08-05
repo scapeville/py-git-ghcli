@@ -9,7 +9,7 @@ on:
       - main  # EDITME
 
 env:
-  pypi-dist-name: py-git-ghcli
+  pypi-dist-name: pyggc
   git-name: fast-pypi-release
   git-email: ${{ vars.NICHOLAS_EMAIL }}
 
