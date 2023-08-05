@@ -3,7 +3,17 @@ import subprocess as _sp
 
 
 def total_stargazers(owner:str, *, gh_cli_bin:str='gh') -> int:
-    """Get the total stargazers count for all `owner` GitHub public repos"""
+    """
+    Get the total stargazers count for all `owner` GitHub public repos
+
+    ---
+
+    ## Params
+    - `owner`: GitHub username
+
+    ## Exceptions
+    - `subprocess.CalledProcessError`: if `owner` is not found
+    """
 
     cmd = [gh_cli_bin, 'repo', 'list', owner, '--visibility', 'public', '--json', 'stargazerCount']
     output = _sp.check_output(cmd, text=True)
@@ -23,6 +33,10 @@ def get_stargazers(owner:str, repo:str, *, gh_cli_bin:str='gh') -> int:
     ## Params
     - `owner`: GitHub username
     - `repo` : GitHub repository name
+
+    ## Exceptions
+    - `subprocess.CalledProcessError`: if `owner` is not found
+    - `KeyError`: if `repo` is not found
     """
 
     cmd = [gh_cli_bin, 'repo', 'list', owner, '--visibility', 'public', '--json', 'name,stargazerCount']
