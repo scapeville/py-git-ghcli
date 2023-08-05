@@ -31,7 +31,7 @@ print(num)
 ```python
 from pyggc.ghcli.simple import get_stargazers
 
-stars = get_stargazers('/projects/my-project')
+stars = get_stargazers(owner='scapeville', repo='py-git-ghcli')
 print(stars)
 ```
 
