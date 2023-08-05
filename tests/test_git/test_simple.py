@@ -45,7 +45,28 @@ class Test__get_num_commits(unittest.TestCase):
 
     def tearDown(self):
         self.assertEqual(os.path.isdir(self.cwd), True)  # Debugging purposes
-        shutil.rmtree(self.cwd)
+
+        ## For Windows (ref: https://stackoverflow.com/questions/2656322/shutil-rmtree-fails-on-windows-with-access-is-denied)
+        def onerror(func, path, exc_info):
+            """
+            Error handler for ``shutil.rmtree``.
+
+            If the error is due to an access error (read only file)
+            it attempts to add write permission and then retries.
+
+            If the error is for another reason it re-raises the error.
+            
+            Usage : ``shutil.rmtree(path, onerror=onerror)``
+            """
+            import stat
+            # Is the error an access error?
+            if not os.access(path, os.W_OK):
+                os.chmod(path, stat.S_IWUSR)
+                func(path)
+            else:
+                raise
+
+        shutil.rmtree(self.cwd, onerror=onerror)
 
     def test_success(self):
 
