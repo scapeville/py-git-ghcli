@@ -75,6 +75,8 @@ class Test__get_num_commits(unittest.TestCase):
         sp.run(['git', 'config', 'user.name', 'foo'], cwd=self.cwd, check=True)
         sp.run(['git', 'config', 'user.email', 'bar'], cwd=self.cwd, check=True)
 
+        self.assertEqual(get_num_commits(self.cwd), 0)
+
         ## Make a dummy commit
         open(os.path.join(self.cwd, 'foo.txt'), 'w').close()
         sp.run(['git', 'add', '.'], cwd=self.cwd, check=True)
@@ -105,8 +107,8 @@ class Test__get_num_commits(unittest.TestCase):
         self.assertEqual(os.path.isfile(file_path), True)
 
         ## Test
-        with self.assertRaises(sp.CalledProcessError):
-            get_num_commits(self.cwd)
+        with self.assertRaises(ValueError) as ctx: get_num_commits(self.cwd)
+        self.assertEqual(str(ctx.exception), f'Dir {repr(self.cwd)} is not a git repo.')
 
 
 if __name__ == '__main__':
