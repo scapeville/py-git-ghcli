@@ -26,12 +26,20 @@ def get_num_commits(repo_root_dir:str, *, git_bin:str='git') -> int:
 
     ## Params
     - `repo_root_dir`: Absolute path to the repository root directory (where `.git` folder lives)
+
+    ## Exceptions
+    - `ValueError`: If `repo_root_dir` isn't a Git repo
     """
     try:
         cmd = [git_bin, 'rev-list', '--count', 'HEAD']
-        res = _sp.check_output(cmd, cwd=repo_root_dir, text=True)
+        res = _sp.check_output(cmd, cwd=repo_root_dir, text=True, stderr=_sp.STDOUT)
         return int(res.strip())
-    except _sp.CalledProcessError:
-        ## Poorly handling the case when a Git repo has no commits.
-        ## TODO: Handle this error more appropriately, as a non-Git repo will raise the same exception.
-        return 0
+    except _sp.CalledProcessError as err:
+
+        ## Not a Git repo
+        if str(err).strip() == 'fatal: not a git repository (or any of the parent directories): .git':
+            raise ValueError(f'Dir {repr(repo_root_dir)} is not a git repo.')
+        
+        ## Git repo with no commits
+        if str(err).startswith("fatal: ambiguous argument 'HEAD': unknown revision or path not in the working tree."):
+            return 0
