@@ -27,6 +27,11 @@ def get_num_commits(repo_root_dir:str, *, git_bin:str='git') -> int:
     ## Params
     - `repo_root_dir`: Absolute path to the repository root directory (where `.git` folder lives)
     """
-    cmd = [git_bin, 'rev-list', '--count', 'HEAD']
-    res = _sp.check_output(cmd, cwd=repo_root_dir, text=True)
-    return int(res.strip())
+    try:
+        cmd = [git_bin, 'rev-list', '--count', 'HEAD']
+        res = _sp.check_output(cmd, cwd=repo_root_dir, text=True)
+        return int(res.strip())
+    except _sp.CalledProcessError:
+        ## Poorly handling the case when a Git repo has no commits.
+        ## TODO: Handle this error more appropriately, as a non-Git repo will raise the same exception.
+        return 0
