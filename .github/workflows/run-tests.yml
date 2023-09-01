@@ -6,6 +6,10 @@ on:
       - main
     paths:
       - 'pyggc/**'
+  pull_request:
+    types:
+      - opened
+      - synchronize
   workflow_dispatch:
 
 jobs:
@@ -13,7 +17,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        version: ['3.8', '3.9', '3.10']
+        version: ['3.8', '3.9', '3.10', '3.11']
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
